@@ -26,6 +26,9 @@ builder.Services.Configure<IdentityOptions>(
         op.Password.RequireUppercase = false;
         op.Password.RequireNonAlphanumeric = false;
         op.Password.RequiredLength = 4;
+        op.User.RequireUniqueEmail = true;
+        op.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+        op.Lockout.MaxFailedAccessAttempts = 5;
     }
 );
 builder.Services.AddScoped<IBookService, BookRepositoryEF>();
