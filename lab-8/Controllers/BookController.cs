@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using lab_8.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace lab_8.Controllers
 {
@@ -16,7 +17,8 @@ namespace lab_8.Controllers
         {
             return View(_bookService.FindAll());
         }
-        
+
+        [Authorize]
         public IActionResult Details(int? id)
         {
             var book = _bookService.FindBy(id);
