@@ -18,7 +18,16 @@ builder.Services.AddDbContext<UserContext>(
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<UserContext>();
-
+builder.Services.Configure<IdentityOptions>(
+    op =>
+    {
+        op.Password.RequireDigit = false;
+        op.Password.RequireLowercase = false;
+        op.Password.RequireUppercase = false;
+        op.Password.RequireNonAlphanumeric = false;
+        op.Password.RequiredLength = 4;
+    }
+);
 builder.Services.AddScoped<IBookService, BookRepositoryEF>();
 builder.Services.AddSingleton<IClockProvider, DefaultClock>();
 var app = builder.Build();
