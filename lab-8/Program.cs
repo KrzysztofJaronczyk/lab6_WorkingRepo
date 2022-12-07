@@ -16,7 +16,9 @@ builder.Services.AddDbContext<UserContext>(
     options => options.UseSqlServer(builder.Configuration["Data:Connection"]));
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<UserContext>();
+
 builder.Services.AddScoped<IBookService, BookRepositoryEF>();
 builder.Services.AddSingleton<IClockProvider, DefaultClock>();
 var app = builder.Build();
